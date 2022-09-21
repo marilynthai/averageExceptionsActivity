@@ -10,11 +10,15 @@ def calculator():
     numbers = []
     while not finished:
         user_input = input("Enter an integer or 'compute': ")
-        
-        if user_input == "compute":
+        # if type(user_input) == str:
+        #     raise ValueError
+        if len(numbers) == 0:
+            raise ValueError('cannot compute average of an empty collection')
+        elif user_input == "compute":
+            # if len(numbers) == 0:
+            #     raise ValueError("cannot compute average of an empty collection")
             print_average(numbers)
             finished = True
-           
         else:
             try:
                 number = int(user_input)
@@ -31,5 +35,8 @@ def print_average(numbers):
 
 
 def rounded_average(numbers):
-    avg = sum(numbers) / len(numbers)
-    return floor(avg)
+    try:
+        avg = sum(numbers) / len(numbers)
+        return floor(avg)
+    except ValueError as error:
+        return error
